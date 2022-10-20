@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.css"/>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+
+<div class="container">
+
+    <h1>Lista kontaktów</h1>
+    <a th:href="@{/add}" class="btn btn-primary mb-2">Dodaj nowy kontakt</a>
+
+    <table class="table table-bordered table-striped" id="contact-table">
+<thead>
+    <tr>
+        <th>Imię</th>
+        <th>Wiek</th>
+        <th>Numer telefonu</th>
+        <th>Opcje</th>
+    </tr>
+</thead>
+
+        <tbody>
+        <tr th:each="contact : ${allContacts}">
+            <td th:text="${contact.name}"></td>
+            <td th:text="${contact.age}"></td>
+            <td th:text="${contact.phoneNumber}"></td>
+            <td>
+                <a th:href="@{/update(id = ${contact.id})}" class="btn btn-info">Aktualizacja kontaktu</a>
+                <a th:href="@{/delete(id = ${contact.id})}" class="btn btn-danger">Usuń</a>
+            </td>
+        </tr>
+        </tbody>
+
+
+    </table>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.js"></script>
+<script>
+
+    $(document).ready(function() {
+    $("#contact-table").DataTable()({
+        'aoColumnDefs': [{
+        'bSortable': false,
+        'aTargets':[-1]
+        }]
+    });
+    })
+
+</script>
+
+<body>
+
+</body>
+</html>
